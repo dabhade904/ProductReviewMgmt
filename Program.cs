@@ -24,8 +24,10 @@
             productHandler.TopRecords(productList);
             Console.WriteLine("Selected records");
             productHandler.GetRecordBasedOnRating(productList);
-
-        
+            Console.WriteLine("Skiped Records");
+            productHandler.SkipRecords(productList);
+            Console.WriteLine("Count of record");
+            productHandler.GetCountOfRecords(productList);
         }
     }
 }

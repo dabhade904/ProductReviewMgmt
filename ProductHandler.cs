@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace ProductReviewManagement
                 Console.WriteLine("Product: {0},{1},{2},{3},{4}", review.ProductID, review.UserID, review.Ratings, review.Review, review.IsLike);
             }
         }
-        public void SelectedRecords(List<ProductReview> reviews)
+        public void GetRecordBasedOnRating(List<ProductReview> reviews)
         {
             var selectedRecords = from ProductReview in reviews
                                   where (ProductReview.ProductID == 1 && ProductReview.Ratings > 3) ||
@@ -27,6 +28,23 @@ namespace ProductReviewManagement
                                     (ProductReview.ProductID == 9 && ProductReview.Ratings > 3)
                                   select ProductReview;
             foreach (ProductReview records in selectedRecords)
+            {
+                Console.WriteLine("Product: {0},{1},{2},{3},{4}", records.ProductID, records.UserID, records.Ratings, records.Review, records.IsLike);
+            }
+        }
+
+        public void GetCount(List<ProductReview> reviews)
+        {
+            var recordData = reviews.GroupBy(user => user.ProductID).Select(user=> new { ProductID =user.Key,Count=user.Count()});
+            foreach(var reocrdCount in recordData)
+            {
+                Console.WriteLine(reocrdCount.ProductID + " ------- " + recordData.Count());
+            }  
+        }
+        public void SkipRecords(List<ProductReview> reviews)
+        {
+            var middleNames = reviews.Skip(5).ToList();
+            foreach (ProductReview records in middleNames)
             {
                 Console.WriteLine("Product: {0},{1},{2},{3},{4}", records.ProductID, records.UserID, records.Ratings, records.Review, records.IsLike);
             }
