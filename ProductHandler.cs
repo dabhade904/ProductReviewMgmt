@@ -32,6 +32,12 @@ namespace ProductReviewManagement
             }
         }
 
+        public void GetCount(List<ProductReview> reviews)
+        {
+            var usersGroupedByCountry = reviews.GroupBy(user => user.ProductID);
+            Console.WriteLine(usersGroupedByCountry.Count());
+            
+        }
         public void SkipRecords(List<ProductReview> reviews)
         {
             var middleNames = reviews.Skip(5).ToList();

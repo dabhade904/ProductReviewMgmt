@@ -20,12 +20,13 @@
             productList.Add(new ProductReview(11, 1, 5, "good", true));
             productList.Add(new ProductReview(3, 10, 3, "good", false));
 
-            Console.WriteLine("Top record");
+            /*Console.WriteLine("Top record");
             productHandler.TopRecords(productList);
             Console.WriteLine("Selected records");
             productHandler.GetRecordBasedOnRating(productList);
             Console.WriteLine("Skiped Records");
-            productHandler.SkipRecords(productList);
+            productHandler.SkipRecords(productList);*/
+            productHandler.GetCount(productList);
         }
     }
 }
