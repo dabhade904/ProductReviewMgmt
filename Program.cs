@@ -5,29 +5,32 @@
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome");
-            List<ProductReview> productList = new List<ProductReview>();
-            ProductHandler productHandler = new ProductHandler();
-            productList.Add(new ProductReview(1, 1, 5, "good", false));
-            productList.Add(new ProductReview(2, 2, 2, "good", false));
-            productList.Add(new ProductReview(3, 4, 3, "good", true));
-            productList.Add(new ProductReview(4, 5, 1, "bad", false));
-            productList.Add(new ProductReview(6, 1, 3.5, "good", true));
-            productList.Add(new ProductReview(2, 4, 3, "good", true));
-            productList.Add(new ProductReview(7, 7, 4.5, "good", true));
-            productList.Add(new ProductReview(1, 4, 4, "good", true));
-            productList.Add(new ProductReview(9, 8, 3, "good", true));
-            productList.Add(new ProductReview(7, 3, 1, "bad", false));
-            productList.Add(new ProductReview(11, 1, 5, "good", true));
-            productList.Add(new ProductReview(3, 10, 3, "good", false));
-
-            Console.WriteLine("Top record");
-            productHandler.TopRecords(productList);
-            Console.WriteLine("Selected records");
-            productHandler.GetRecordBasedOnRating(productList);
-            Console.WriteLine("Skiped Records");
-            productHandler.SkipRecords(productList);
-            Console.WriteLine("Count of record");
-            productHandler.GetCountOfRecords(productList);
+            
+            bool end = true;
+            while (end)
+            {
+                Console.WriteLine("\n1. Retrive Top Three Records \n2. Retrive Record Based On Rating \n3. Skip Five Records \n4. Retrive Count Of Records \n5.Ge tProductId And Review From The Record \n6. Create Database ");
+                Console.WriteLine("\nEnter your choice");
+                int option = Convert.ToInt16(Console.ReadLine());
+                switch (option)
+                {
+                    case 0:
+                        Environment.Exit(0);
+                        break;
+                    case 1:
+                        ProductHandler.TopRecords();
+                        break;
+                    case 2:
+                        ProductHandler.GetRecordBasedOnRating();
+                        break;
+                    case 3:
+                        ProductHandler.SkipRecords();
+                        break;
+                    case 4:
+                        ProductHandler.GetCountOfRecords();
+                        break;                  
+                }
+            }
         }
     }
 }
