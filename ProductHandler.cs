@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,9 +35,11 @@ namespace ProductReviewManagement
 
         public void GetCount(List<ProductReview> reviews)
         {
-            var usersGroupedByCountry = reviews.GroupBy(user => user.ProductID);
-            Console.WriteLine(usersGroupedByCountry.Count());
-            
+            var recordData = reviews.GroupBy(user => user.ProductID).Select(user=> new { ProductID =user.Key,Count=user.Count()});
+            foreach(var reocrdCount in recordData)
+            {
+                Console.WriteLine(reocrdCount.ProductID + " ------- " + recordData.Count());
+            }  
         }
         public void SkipRecords(List<ProductReview> reviews)
         {
