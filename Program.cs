@@ -32,6 +32,9 @@
                     case 5:
                         ProductHandler.GetProductIdAndReviewFromTheRecord();
                         break;
+                    case 6:
+                        ProductHandler.CreateDatabase();
+                        break;
                 }
             }
         }

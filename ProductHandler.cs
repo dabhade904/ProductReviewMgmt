@@ -80,5 +80,45 @@ namespace ProductReviewManagement
                 Console.WriteLine(user.ProductId + "" + user.Review);
             }
         }
+        public static void CreateDatabase()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("ProductId");
+            dataTable.Columns.Add("UserId");
+            dataTable.Columns.Add("Rating");
+            dataTable.Columns.Add("Review");
+            dataTable.Columns.Add("IsLike");
+            dataTable.Rows.Add(1, 111, 5, "bad", false);
+            dataTable.Rows.Add(2, 112, 5, "best", true);
+            dataTable.Rows.Add(3, 113, 4, "better", true);
+            dataTable.Rows.Add(4, 114, 3, "Good", true);
+            dataTable.Rows.Add(5, 115, 5, "best", true);
+            dataTable.Rows.Add(6, 116, 4, "better", true);
+            dataTable.Rows.Add(7, 117, 3, "Good", true);
+            dataTable.Rows.Add(8, 118, 4, "Good", true);
+            dataTable.Rows.Add(9, 119, 1, "worst", false);
+            dataTable.Rows.Add(10, 120, 5, "best", true);
+            dataTable.Rows.Add(11, 121, 4, "better", true);
+            dataTable.Rows.Add(12, 122, 4, "better", true);
+            dataTable.Rows.Add(13, 123, 2, "bad", false);
+            dataTable.Rows.Add(14, 124, 1, "bad", false);
+            dataTable.Rows.Add(15, 125, 5, "best", true);
+            dataTable.Rows.Add(16, 126, 5, "best", true);
+            dataTable.Rows.Add(17, 127, 4, "better", true);
+            dataTable.Rows.Add(18, 128, 4, "Good", true);
+            dataTable.Rows.Add(19, 129, 3, "Good", true);
+            dataTable.Rows.Add(20, 130, 3, "Good", true);
+            dataTable.Rows.Add(21, 131, 2, "better", true);
+            dataTable.Rows.Add(22, 132, 5, "best", true);
+            dataTable.Rows.Add(23, 133, 4, "better", true);
+            dataTable.Rows.Add(24, 134, 3, "Good", true);
+            dataTable.Rows.Add(25, 135, 2, "Good", true);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine($"{row["ProductId"]}\t|{row["UserId"]}\t|{row["Review"]}\t|{row["Rating"]}\t|{row["IsLike"]}");
+            }
+        }
     }
 }
