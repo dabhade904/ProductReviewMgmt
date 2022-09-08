@@ -14,7 +14,6 @@ namespace ProductReviewManagement
         public double Ratings { get; set; }
         public string Review { get; set; }
         public bool IsLike { get; set; }
-
         public ProductReview(int ProductID, int UserID, double Ratings, string Review, bool IsLike)
         {
             this.ProductID = ProductID;
