@@ -28,7 +28,10 @@
                         break;
                     case 4:
                         ProductHandler.GetCountOfRecords();
-                        break;                  
+                        break;
+                    case 5:
+                        ProductHandler.GetProductIdAndReviewFromTheRecord();
+                        break;
                 }
             }
         }

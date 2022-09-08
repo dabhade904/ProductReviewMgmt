@@ -10,9 +10,9 @@ namespace ProductReviewManagement
 {
     public static class ProductHandler
     {
-       public static List<ProductReview> productList = new List<ProductReview>();
+        public static List<ProductReview> productList = new List<ProductReview>();
         public static List<ProductReview> ListOfRecords()
-        {          
+        {
             productList.Add(new ProductReview(1, 1, 5, "good", false));
             productList.Add(new ProductReview(2, 2, 2, "good", false));
             productList.Add(new ProductReview(3, 4, 3, "good", true));
@@ -33,7 +33,7 @@ namespace ProductReviewManagement
                               orderby ProductReview.Ratings descending
                               select ProductReview
                             ).Take(3);
-            foreach(ProductReview review in topRecords)
+            foreach (ProductReview review in topRecords)
             {
                 Console.WriteLine("Product: {0},{1},{2},{3},{4}", review.ProductID, review.UserID, review.Ratings, review.Review, review.IsLike);
             }
@@ -54,11 +54,11 @@ namespace ProductReviewManagement
         {
             var recordData = ListOfRecords()
                 .GroupBy(user => user.ProductID).
-                Select(user=> new { ProductID =user.Key,Count=user.Count()});
-            foreach(var reocrdCount in recordData)
+                Select(user => new { ProductID = user.Key, Count = user.Count() });
+            foreach (var reocrdCount in recordData)
             {
                 Console.WriteLine(reocrdCount.ProductID + " ------- " + recordData.Count());
-            }  
+            }
         }
         public static void SkipRecords()
         {
@@ -66,6 +66,18 @@ namespace ProductReviewManagement
             foreach (ProductReview records in skipRecord)
             {
                 Console.WriteLine("Product: {0},{1},{2},{3},{4}", records.ProductID, records.UserID, records.Ratings, records.Review, records.IsLike);
+            }
+        }
+        public static void GetProductIdAndReviewFromTheRecord()
+        {
+            var simpleUsers = ListOfRecords().Select(user => new
+            {
+                ProductId = user.ProductID,
+                Review = user.Review
+            });
+            foreach (var user in simpleUsers)
+            {
+                Console.WriteLine(user.ProductId + "" + user.Review);
             }
         }
     }
