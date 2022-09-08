@@ -4,7 +4,9 @@
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Welcome");
             List<ProductReview> productList = new List<ProductReview>();
+            ProductHandler productHandler = new ProductHandler();
             productList.Add(new ProductReview(1, 1, 5, "good", false));
             productList.Add(new ProductReview(2, 2, 2, "good", false));
             productList.Add(new ProductReview(3, 4, 3, "good", true));
@@ -16,7 +18,14 @@
             productList.Add(new ProductReview(9, 8, 3, "good", true));
             productList.Add(new ProductReview(7, 3, 1, "bad", false));
             productList.Add(new ProductReview(11, 1, 5, "good", true));
-            productList.Add(new ProductReview(3, 10, 3, "good", false));         
+            productList.Add(new ProductReview(3, 10, 3, "good", false));
+
+            Console.WriteLine("Top record");
+            productHandler.TopRecords(productList);
+            Console.WriteLine("Selected records");
+            productHandler.GetRecordBasedOnRating(productList);
+
+        
         }
     }
 }

@@ -19,5 +19,17 @@ namespace ProductReviewManagement
                 Console.WriteLine("Product: {0},{1},{2},{3},{4}", review.ProductID, review.UserID, review.Ratings, review.Review, review.IsLike);
             }
         }
+        public void SelectedRecords(List<ProductReview> reviews)
+        {
+            var selectedRecords = from ProductReview in reviews
+                                  where (ProductReview.ProductID == 1 && ProductReview.Ratings > 3) ||
+                                    (ProductReview.ProductID == 4 && ProductReview.Ratings > 3) ||
+                                    (ProductReview.ProductID == 9 && ProductReview.Ratings > 3)
+                                  select ProductReview;
+            foreach (ProductReview records in selectedRecords)
+            {
+                Console.WriteLine("Product: {0},{1},{2},{3},{4}", records.ProductID, records.UserID, records.Ratings, records.Review, records.IsLike);
+            }
+        }
     }
 }
