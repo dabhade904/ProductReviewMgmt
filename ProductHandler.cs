@@ -11,6 +11,7 @@ namespace ProductReviewManagement
     public static class ProductHandler
     {
         public static List<ProductReview> productList = new List<ProductReview>();
+        public static DataTable dataTable = new DataTable();
         public static List<ProductReview> ListOfRecords()
         {
             productList.Add(new ProductReview(1, 1, 5, "good", false));
@@ -80,9 +81,8 @@ namespace ProductReviewManagement
                 Console.WriteLine(user.ProductId + "" + user.Review);
             }
         }
-        public static void CreateDatabase()
+        public static string CreateDatabase()
         {
-            DataTable dataTable = new DataTable();
             dataTable.Columns.Add("ProductId");
             dataTable.Columns.Add("UserId");
             dataTable.Columns.Add("Rating");
@@ -119,6 +119,61 @@ namespace ProductReviewManagement
                 Console.WriteLine("\n");
                 Console.WriteLine($"{row["ProductId"]}\t|{row["UserId"]}\t|{row["Review"]}\t|{row["Rating"]}\t|{row["IsLike"]}");
             }
+            return dataTable.ToString();
         }
-    }
+
+        public static string GetRecordsFromListUsingDataField()
+        {
+            List<ProductReview> productList = new List<ProductReview>();
+            CreateDatabase();
+            string productsList = "";
+            var result = from data in dataTable.AsEnumerable()
+                         where data.Field<bool>("IsLike") == true
+                         select data;
+            foreach (var product in result)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", product["ProductId"], product["UserId"], product["Rating"], product["Review"], product["IsLike"]);
+                productsList += product["UserId"] + " ";
+            }
+            return productsList;
+        }
+
+        public static string GetAverageRatings()
+        {
+            string result = "";
+            var res = from product in dataTable.AsEnumerable() group product by product.Field<int>("ProductId") into temp select new { ProductId = temp.Key, Average = Math.Round(temp.Average(x => x.Field<int>("Rating")), 1) };
+            foreach (var ratings in res)
+            {
+                Console.WriteLine("Product id: {0} Average Rating: {1}", ratings.ProductId, ratings.Average);
+                result += ratings.Average + " ";
+            }     
+            return result;
+        }
+
+        public static string RetrieveAllNiceReviews()
+        {
+            CreateDatabase();       
+            string productsList = "";
+            var res = from product in dataTable.AsEnumerable() where product.Field<string>("Review") == "nice" select product;
+            foreach (var data in res)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", data["ProductId"], data["UserId"], data["Rating"], data["Review"], data["IsLike"]);
+                productsList += data["UserId"] + " ";
+            }
+            return productsList;
+        }
+
+        public static string RetrieveAllProductReviews_ByUserIDAndOrderByRating()
+        {
+            CreateDatabase();
+            string productsList = "";
+            var res = (from product in dataTable.AsEnumerable() where product.Field<Int32>("UserId") == 10 orderby product.Field<int>("Rating") select product).ToList();
+            foreach (var products in res)
+            {
+                Console.WriteLine("{0} ; {1} ; {2} ; {3} ; {4} ", products["ProductId"], products["UserId"], products["Rating"], products["Review"], products["IsLike"]);
+                productsList += products["Rating"] + " ";
+            }
+            return productsList;
+        }
+    } 
 }
