@@ -38,6 +38,9 @@
                     case 7:
                         ProductHandler.GetRecordsFromListUsingDataField();
                         break;
+                    case 8:
+                        ProductHandler.GetAverageRatings();
+                        break;
                 }
             }
         }

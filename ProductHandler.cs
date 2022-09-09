@@ -138,5 +138,17 @@ namespace ProductReviewManagement
             return productsList;
         }
 
-    }
+        public static string GetAverageRatings()
+        {
+            string result = "";
+            CreateDatabase();
+            var res = from product in dataTable.AsEnumerable() group product by product.Field<int>("ProductId") into temp select new { ProductId = temp.Key, Average = Math.Round(temp.Average(x => x.Field<int>("Rating")), 1) };
+            foreach (var ratings in res)
+            {
+                Console.WriteLine("Product id: {0} Average Rating: {1}", ratings.ProductId, ratings.Average);
+                result += ratings.Average + " ";
+            }     
+            return result;
+        }
+    } 
 }
