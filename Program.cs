@@ -35,6 +35,9 @@
                     case 6:
                         ProductHandler.CreateDatabase();
                         break;
+                    case 7:
+                        ProductHandler.GetRecordsFromListUsingDataField();
+                        break;
                 }
             }
         }

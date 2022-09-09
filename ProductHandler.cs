@@ -11,6 +11,7 @@ namespace ProductReviewManagement
     public static class ProductHandler
     {
         public static List<ProductReview> productList = new List<ProductReview>();
+        public static DataTable dataTable = new DataTable();
         public static List<ProductReview> ListOfRecords()
         {
             productList.Add(new ProductReview(1, 1, 5, "good", false));
@@ -80,9 +81,8 @@ namespace ProductReviewManagement
                 Console.WriteLine(user.ProductId + "" + user.Review);
             }
         }
-        public static void CreateDatabase()
+        public static string CreateDatabase()
         {
-            DataTable dataTable = new DataTable();
             dataTable.Columns.Add("ProductId");
             dataTable.Columns.Add("UserId");
             dataTable.Columns.Add("Rating");
@@ -119,6 +119,24 @@ namespace ProductReviewManagement
                 Console.WriteLine("\n");
                 Console.WriteLine($"{row["ProductId"]}\t|{row["UserId"]}\t|{row["Review"]}\t|{row["Rating"]}\t|{row["IsLike"]}");
             }
+            return dataTable.ToString();
         }
+
+        public static string GetRecordsFromListUsingDataField()
+        {
+            List<ProductReview> productList = new List<ProductReview>();
+            CreateDatabase();
+            string productsList = "";
+            var result = from data in dataTable.AsEnumerable()
+                         where data.Field<bool>("IsLike") == true
+                         select data;
+            foreach (var product in result)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", product["ProductId"], product["UserId"], product["Rating"], product["Review"], product["IsLike"]);
+                productsList += product["UserId"] + " ";
+            }
+            return productsList;
+        }
+
     }
 }
