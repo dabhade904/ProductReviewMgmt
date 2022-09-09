@@ -152,15 +152,26 @@ namespace ProductReviewManagement
 
         public static string RetrieveAllNiceReviews()
         {
-            CreateDatabase();
-            List<ProductReview> ProductReviewsList = new List<ProductReview>();
-
+            CreateDatabase();       
             string productsList = "";
             var res = from product in dataTable.AsEnumerable() where product.Field<string>("Review") == "nice" select product;
             foreach (var data in res)
             {
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", data["ProductId"], data["UserId"], data["Rating"], data["Review"], data["IsLike"]);
                 productsList += data["UserId"] + " ";
+            }
+            return productsList;
+        }
+
+        public static string RetrieveAllProductReviews_ByUserIDAndOrderByRating()
+        {
+            CreateDatabase();
+            string productsList = "";
+            var res = (from product in dataTable.AsEnumerable() where product.Field<Int32>("UserId") == 10 orderby product.Field<int>("Rating") select product).ToList();
+            foreach (var products in res)
+            {
+                Console.WriteLine("{0} ; {1} ; {2} ; {3} ; {4} ", products["ProductId"], products["UserId"], products["Rating"], products["Review"], products["IsLike"]);
+                productsList += products["Rating"] + " ";
             }
             return productsList;
         }

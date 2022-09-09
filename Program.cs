@@ -44,6 +44,10 @@
                     case 9:
                         ProductHandler.RetrieveAllNiceReviews();
                         break;
+                    case 10:
+                        ProductHandler.RetrieveAllProductReviews_ByUserIDAndOrderByRating();
+                        break;
+
                 }
             }
         }
