@@ -141,7 +141,6 @@ namespace ProductReviewManagement
         public static string GetAverageRatings()
         {
             string result = "";
-            CreateDatabase();
             var res = from product in dataTable.AsEnumerable() group product by product.Field<int>("ProductId") into temp select new { ProductId = temp.Key, Average = Math.Round(temp.Average(x => x.Field<int>("Rating")), 1) };
             foreach (var ratings in res)
             {
@@ -149,6 +148,21 @@ namespace ProductReviewManagement
                 result += ratings.Average + " ";
             }     
             return result;
+        }
+
+        public static string RetrieveAllNiceReviews()
+        {
+            CreateDatabase();
+            List<ProductReview> ProductReviewsList = new List<ProductReview>();
+
+            string productsList = "";
+            var res = from product in dataTable.AsEnumerable() where product.Field<string>("Review") == "nice" select product;
+            foreach (var data in res)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", data["ProductId"], data["UserId"], data["Rating"], data["Review"], data["IsLike"]);
+                productsList += data["UserId"] + " ";
+            }
+            return productsList;
         }
     } 
 }
